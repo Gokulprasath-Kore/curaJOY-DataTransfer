@@ -261,6 +261,7 @@ dynamoDB.scan({ TableName: tableName }, (error, data) => {
                     language: eachData.language,
                     Prefered_Coach: eachData.Prefered_Coach,
                     Recent_Channel:eachData.Recent_Channel,
+                    Instagram_Contact_Id:eachData.Instagram_Contact_Id
                   },
                 };
             
@@ -282,6 +283,7 @@ dynamoDB.scan({ TableName: tableName }, (error, data) => {
                     ':languageAlias': eachData.language,
                     ':Prefered_Coach': eachData.Prefered_Coach,
                     ':Recent_Channel':eachData.Recent_Channel,
+                    ':Instagram_Contact_Id':eachData.Instagram_Contact_Id
                   // Add more attributes and values as needed
                 };
             const updateParams = {
@@ -296,12 +298,13 @@ dynamoDB.scan({ TableName: tableName }, (error, data) => {
                   ':languageAlias': updateValues[':languageAlias'],
                   ':Prefered_Coach': updateValues[':Prefered_Coach'],
                   ':Recent_Channel': updateValues[':Recent_Channel'],
+                  ':Instagram_Contact_Id':updateValues[':Instagram_Contact_Id']
               },
               ExpressionAttributeNames: {
                 '#L': 'language', // Define an alias for the reserved keyword
               },
             };
-            updateParams.UpdateExpression = `SET email=:email,Id = :Id,Phone_number = :Phone_number,#L = :languageAlias,Prefered_Coach = :Prefered_Coach,Recent_Channel = :Recent_Channel`;
+            updateParams.UpdateExpression = `SET email=:email,Id = :Id,Phone_number = :Phone_number,#L = :languageAlias,Prefered_Coach = :Prefered_Coach,Recent_Channel = :Recent_Channel,Instagram_Contact_Id = :Instagram_Contact_Id`;
         
             dynamoDB.update(updateParams, (error, data) => {
               if (error) {
